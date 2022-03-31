@@ -1,0 +1,73 @@
+<div class="text-center mb-3">
+  <button type="button" class="btn btn-primary" (click)="showTaskForm()">
+    Add New Task
+  </button>
+</div>
+
+<div
+  class="container shadow-lg p-3 mb-5 bg-white rounded"
+  *ngIf="isShowTaskForm"
+>
+  <form>
+    <div class="form-group">
+      <label for="taskName">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="todo.TASK_NAME"
+        id="taskName"
+        name="taskName"
+        placeholder="Enter Task Name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="taskDesc">Description</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="todo.TASK_DESC"
+        id="taskDesc"
+        name="taskDesc"
+        placeholder="Enter Task Description"
+      />
+    </div>
+    <div class="form-group">
+      <label for="taskDue">Due Date</label>
+      <div class="col-12">
+        <div class="input-group">
+          <input
+            class="form-control"
+            [(ngModel)]="todo.TASK_DUE"
+            placeholder="yyyy-mm-dd"
+            id="taskDue"
+            name="taskDue"
+            ngbDatepicker
+            #d="ngbDatepicker"
+          />
+          <button
+            class="btn btn-outline-secondary calendar"
+            (click)="d.toggle()"
+            type="button"
+          ></button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="taskStatus">Status</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="todo.TASK_STATUS"
+        id="taskStatus"
+        name="taskStatus"
+        value="Pending"
+        [disabled]="true"
+      />
+    </div>
+    <div>
+      <button type="button" class="btn btn-primary mt-3" (click)="addNewTask()">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

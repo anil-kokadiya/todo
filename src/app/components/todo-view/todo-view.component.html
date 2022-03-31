@@ -1,0 +1,42 @@
+<div class="container">
+  <div *ngIf="todos.length === 0; else showTodo">
+    <div class="h3 text-center">No To-Do Found</div>
+  </div>
+  <ng-template #showTodo>
+    <table class="table table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th class="col-md-3">Task ID</th>
+          <th class="col-md-3">Task Name</th>
+          <th class="col-md-3">Due</th>
+          <th class="col-md-3">Status</th>
+          <th colspan="3" class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of todos">
+          <td>{{ e.TASK_ID }}</td>
+          <td>{{ e.TASK_NAME }}</td>
+          <td>{{ e.TASK_DUE }}</td>
+          <td>{{ e.TASK_STATUS }}</td>
+          <td>
+            <input
+              type="button"
+              routerLink="/todo/{{ e.TASK_ID }}"
+              (click)="viewTodo(e.TASK_ID)"
+              value="View"
+            />
+          </td>
+          <td>Update</td>
+          <td>
+            <input
+              type="button"
+              (click)="deleteTodo(e.TASK_ID)"
+              value="Delete"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
+</div>

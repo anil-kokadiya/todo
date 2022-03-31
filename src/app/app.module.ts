@@ -3,16 +3,39 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TodoComponent } from './components/todo/todo.component';
+import { SingleTodoComponent } from './components/single-todo/single-todo.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+
+import { HttpClientModule } from '@angular/common/http';
+import { TodoViewComponent } from './components/todo-view/todo-view.component';
+import { TodoSingleComponent } from './components/todo-single/todo-single.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TodoAddComponent } from './components/todo-add/todo-add.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TodoComponent,
+    SingleTodoComponent,
+    HeaderComponent,
+    FooterComponent,
+    TodoViewComponent,
+    TodoSingleComponent,
+    TodoAddComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NgbModule,
+    FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
