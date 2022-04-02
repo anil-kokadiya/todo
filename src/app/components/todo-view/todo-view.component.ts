@@ -15,6 +15,14 @@ export class TodoViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTodoList();
+    console.log(this.todoService.convertStringToDateObject('2021/01/01'));
+    console.log(
+      this.todoService.converDateObjectToString(
+        this.todoService.convertStringToDateObject('2021/01/01'),
+        'DDMMYYYY',
+        '/'
+      )
+    );
   }
 
   getTodoList(isTodoBlank: boolean = false) {
@@ -61,5 +69,9 @@ export class TodoViewComponent implements OnInit {
     this.todoService.updateTodoEntry(this.todo).subscribe((data) => {
       console.log('UPDATE SUCCESSFULLY', data);
     });
+  }
+
+  updateTodo(id: number) {
+    console.log('UPDATE : ', id);
   }
 }

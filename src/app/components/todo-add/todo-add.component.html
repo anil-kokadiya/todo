@@ -38,17 +38,19 @@
           <input
             class="form-control"
             [(ngModel)]="todo.TASK_DUE"
-            placeholder="yyyy-mm-dd"
+            [minDate]="{ year: 2011, month: 11, day: 1 }"
+            [maxDate]="{ year: 2011, month: 11, day: 7 }"
+            placeholder="DD/MM/YYYY"
             id="taskDue"
             name="taskDue"
             ngbDatepicker
             #d="ngbDatepicker"
           />
-          <button
-            class="btn btn-outline-secondary calendar"
+          <i-bs
+            class="btn btn-outline-secondary"
+            name="calendar"
             (click)="d.toggle()"
-            type="button"
-          ></button>
+          ></i-bs>
         </div>
       </div>
     </div>

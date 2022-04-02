@@ -5,6 +5,7 @@ import { TodoComponent } from './components/todo/todo.component';
 
 const routes: Routes = [
   { path: '', component: TodoComponent },
+  { path: 'todo', component: TodoComponent },
   { path: 'todo/:id', component: TodoSingleComponent },
 ];
 

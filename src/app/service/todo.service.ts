@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import {
@@ -7,6 +7,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Todo } from '../components/todo';
+import * as moment from 'moment/moment';
 
 @Injectable({
   providedIn: 'root',
@@ -50,6 +51,89 @@ export class TodoService {
     return this.httpClient
       .put<Todo>(this.toDoUrl + '/' + todo.TASK_ID, todo, this.httpOptions)
       .pipe(retry(3), catchError(this.httpErrorHandler));
+  }
+
+  public converDateObjectToString(
+    dateObject: any,
+    targetDateFormat: any,
+    delimeter: any
+  ) {
+    if (
+      typeof dateObject == 'undefined' ||
+      dateObject == null ||
+      dateObject == ''
+    )
+      return '';
+    else if (typeof dateObject == 'string') {
+      dateObject = this.convertStringToDateObject(dateObject);
+    }
+    if (typeof dateObject == 'object') {
+      if (targetDateFormat == 'DDMMYYYY') {
+        return (
+          (dateObject['day'].toString().length === 1
+            ? '0' + dateObject['day']
+            : dateObject['day']) +
+          delimeter +
+          (dateObject['month'].toString().length === 1
+            ? '0' + dateObject['month']
+            : dateObject['month']) +
+          delimeter +
+          dateObject['year']
+        );
+      } else if (targetDateFormat == 'MMDDYYYY') {
+        return (
+          (dateObject['month'].toString().length === 1
+            ? '0' + dateObject['month']
+            : dateObject['month']) +
+          delimeter +
+          (dateObject['day'].toString().length === 1
+            ? '0' + dateObject['day']
+            : dateObject['day']) +
+          delimeter +
+          dateObject['year']
+        );
+      } else if (targetDateFormat == 'YYYYMMDD') {
+        return (
+          dateObject['year'] +
+          delimeter +
+          (dateObject['month'].toString().length === 1
+            ? '0' + dateObject['month']
+            : dateObject['month']) +
+          delimeter +
+          (dateObject['day'].toString().length === 1
+            ? '0' + dateObject['day']
+            : dateObject['day'])
+        );
+      }
+    }
+  }
+
+  convertStringToDateObject(
+    date: string,
+    format: string = 'YYYY-MM-DD',
+    outputFormat: string = 'JSON'
+  ) {
+    if (typeof date == 'string') {
+      if (date.indexOf(' ') > 0) {
+        date = date.trim().split(' ')[0];
+      }
+      if (date.indexOf('T') > 0) {
+        date = date.trim().split('T')[0];
+      }
+      if (outputFormat == 'JSON') {
+        return JSON.parse(
+          moment(date, format).format(
+            '{["year"]: YYYY, ["month"]: M, ["day"]: D}'
+          )
+        );
+      } else {
+        return moment(date, format);
+      }
+    } else if (typeof date == 'object') {
+      return date;
+    } else {
+      return '';
+    }
   }
 
   private httpErrorHandler(error: HttpErrorResponse) {
