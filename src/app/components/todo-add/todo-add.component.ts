@@ -92,5 +92,6 @@ export class TodoAddComponent extends NgbDateParserFormatter implements OnInit {
       TASK_STATUS: 'Pending',
     };
     this.isShowTaskForm = false;
+    window.location.reload();
   }
 }

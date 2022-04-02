@@ -17,6 +17,10 @@ import { FormsModule } from '@angular/forms';
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
 import { allIcons } from 'ngx-bootstrap-icons';
 import { TodoUpdateComponent } from './components/todo-update/todo-update.component';
+import { PricingComponent } from './components/pricing/pricing.component';
+import { FeaturesComponent } from './components/features/features.component';
+import { FaqComponent } from './components/faq/faq.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +32,10 @@ import { TodoUpdateComponent } from './components/todo-update/todo-update.compon
     TodoSingleComponent,
     TodoAddComponent,
     TodoUpdateComponent,
+    PricingComponent,
+    FeaturesComponent,
+    FaqComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
