@@ -110,7 +110,7 @@ export class TodoService {
 
   convertStringToDateObject(
     date: string,
-    format: string = 'YYYY-MM-DD',
+    format: string = 'DD-MM-YYYY',
     outputFormat: string = 'JSON'
   ) {
     if (typeof date == 'string') {

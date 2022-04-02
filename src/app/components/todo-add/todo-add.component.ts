@@ -12,12 +12,12 @@ import { Todo } from '../todo';
   styleUrls: ['./todo-add.component.css'],
 })
 export class TodoAddComponent extends NgbDateParserFormatter implements OnInit {
-  readonly DELIMITER = '-';
+  readonly DELIMITER = '/';
   parse(value: string): NgbDateStruct {
     let result: NgbDateStruct = {
       day: 1,
-      month: 12,
-      year: 16,
+      month: 11,
+      year: 2021,
     };
     if (value) {
       let date = value.split(this.DELIMITER);

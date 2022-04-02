@@ -16,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
 import { allIcons } from 'ngx-bootstrap-icons';
+import { TodoUpdateComponent } from './components/todo-update/todo-update.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { allIcons } from 'ngx-bootstrap-icons';
     TodoViewComponent,
     TodoSingleComponent,
     TodoAddComponent,
+    TodoUpdateComponent,
   ],
   imports: [
     BrowserModule,
