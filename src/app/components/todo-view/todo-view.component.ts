@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../todo';
 import { TodoService } from 'src/app/service/todo.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo-view',
@@ -9,28 +10,56 @@ import { TodoService } from 'src/app/service/todo.service';
 })
 export class TodoViewComponent implements OnInit {
   todos: Todo[] = [];
-  constructor(private todoService: TodoService) {}
+  todo!: Todo;
+  constructor(private todoService: TodoService, private router: Router) {}
 
   ngOnInit(): void {
     this.getTodoList();
   }
 
-  getTodoList() {
+  getTodoList(isTodoBlank: boolean = false) {
     this.todoService.getTodos().subscribe((data) => {
+      if (isTodoBlank) {
+        this.todos = [];
+      }
       Object.entries(data).forEach((i) => {
         this.todos.push(i[1]);
       });
       console.log('TODO : ', this.todos);
+      if (this.todos.length > 0) {
+        for (var i = 0; i < this.todos.length; i++) {
+          if (this.todos[i].TASK_STATUS == 'Pending') {
+            this.todos[i].IS_CHECKED = false;
+          } else {
+            this.todos[i].IS_CHECKED = true;
+          }
+        }
+      }
     });
   }
 
   deleteTodo(id: number) {
     this.todoService
       .deleteTodoEntry(id)
-      .subscribe((data) => console.log('DELETED : ', data));
+      .subscribe((data) => this.getTodoList(true));
   }
 
   viewTodo(id: number) {
     console.log('VIEW : ', id);
+    this.router.navigateByUrl('/todo/', { state: [id] });
+  }
+
+  taskStatusChange(id: number) {
+    console.log('Status Change : ', id);
+    for (var i = 0; i < this.todos.length; i++) {
+      if (this.todos[i].TASK_ID == id) {
+        this.todo = this.todos[i];
+      }
+    }
+    this.todo.TASK_STATUS = 'Completed';
+    console.log('DATA TO BE UPDATE:', this.todo);
+    this.todoService.updateTodoEntry(this.todo).subscribe((data) => {
+      console.log('UPDATE SUCCESSFULLY', data);
+    });
   }
 }

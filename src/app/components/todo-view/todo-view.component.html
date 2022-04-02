@@ -6,34 +6,54 @@
     <table class="table table-striped">
       <thead class="table-dark">
         <tr>
+          <th class="col-md-3">Completed</th>
           <th class="col-md-3">Task ID</th>
           <th class="col-md-3">Task Name</th>
           <th class="col-md-3">Due</th>
-          <th class="col-md-3">Status</th>
           <th colspan="3" class="text-center">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let e of todos">
+          <td>
+            <div class="form-check">
+              <input
+                mdbCheckbox
+                class="form-check-input"
+                type="checkbox"
+                value="e.IS_CHECKED"
+                id="flexCheckDefault"
+                [checked]="e.IS_CHECKED"
+                (change)="taskStatusChange(e.TASK_ID)"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                {{ e.TASK_STATUS }}
+              </label>
+            </div>
+          </td>
           <td>{{ e.TASK_ID }}</td>
           <td>{{ e.TASK_NAME }}</td>
           <td>{{ e.TASK_DUE }}</td>
-          <td>{{ e.TASK_STATUS }}</td>
           <td>
-            <input
-              type="button"
-              routerLink="/todo/{{ e.TASK_ID }}"
+            <i-bs
+              name="eye-fill"
+              class="cursor-pointer"
               (click)="viewTodo(e.TASK_ID)"
-              value="View"
-            />
+            ></i-bs>
           </td>
-          <td>Update</td>
           <td>
-            <input
-              type="button"
+            <i-bs
+              name="pen-fill"
+              class="cursor-pointer"
               (click)="deleteTodo(e.TASK_ID)"
-              value="Delete"
-            />
+            ></i-bs>
+          </td>
+          <td>
+            <i-bs
+              name="trash-fill"
+              class="cursor-pointer"
+              (click)="deleteTodo(e.TASK_ID)"
+            ></i-bs>
           </td>
         </tr>
       </tbody>

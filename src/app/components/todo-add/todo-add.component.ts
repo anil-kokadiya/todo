@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TodoService } from 'src/app/service/todo.service';
+import { Todo } from '../todo';
 
 @Component({
   selector: 'app-todo-add',
@@ -8,6 +9,7 @@ import { TodoService } from 'src/app/service/todo.service';
 })
 export class TodoAddComponent implements OnInit {
   isShowTaskForm: boolean = false;
+  @Output() todoViewEmitter: EventEmitter<Todo> = new EventEmitter();
   todo: any = {
     TASK_NAME: '',
     TASK_DESC: '',
@@ -28,6 +30,7 @@ export class TodoAddComponent implements OnInit {
 
   addNewTask() {
     var selectedDate = '';
+    console.log('Here');
     if (this.todo.TASK_DUE['day'].toString().length === 1) {
       this.todo.TASK_DUE['day'] = '0' + this.todo.TASK_DUE['day'];
     }
@@ -45,15 +48,16 @@ export class TodoAddComponent implements OnInit {
     this.todo.TASK_DUE = selectedDate;
     console.log('SELECTED DATE : ', selectedDate);
     console.log('ADD TODO : ', this.todo);
-    this.createTask();
+    this.todoViewEmitter.emit(this.todo);
+    this.clearTaskForm();
   }
 
-  createTask() {
-    this.todoService.addTodoEntry(this.todo).subscribe((data) => {
-      console.log('ADDED : ', data);
-      this.clearTaskForm();
-    });
-  }
+  // createTask() {
+  //   this.todoService.addTodoEntry(this.todo).subscribe((data) => {
+  //     console.log('ADDED : ', data);
+  //     this.clearTaskForm();
+  //   });
+  // }
 
   clearTaskForm() {
     this.todo = {

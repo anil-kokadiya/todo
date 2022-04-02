@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoService } from 'src/app/service/todo.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-todo-single',
   templateUrl: './todo-single.component.html',
-  styleUrls: ['./todo-single.component.css']
+  styleUrls: ['./todo-single.component.css'],
 })
 export class TodoSingleComponent implements OnInit {
-
-  constructor() { }
+  toDoId: number = 0;
+  constructor(private todoService: TodoService, private location: Location) {}
 
   ngOnInit(): void {
+    this.toDoId = history.state[0];
+    this.getSingleTodo();
   }
 
+  getSingleTodo() {}
 }

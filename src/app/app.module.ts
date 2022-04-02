@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TodoComponent } from './components/todo/todo.component';
-import { SingleTodoComponent } from './components/single-todo/single-todo.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 
@@ -15,12 +14,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TodoAddComponent } from './components/todo-add/todo-add.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
+import { allIcons } from 'ngx-bootstrap-icons';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoComponent,
-    SingleTodoComponent,
     HeaderComponent,
     FooterComponent,
     TodoViewComponent,
@@ -34,6 +34,7 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     NgbModule,
     FormsModule,
+    NgxBootstrapIconsModule.pick(allIcons),
   ],
   providers: [],
   bootstrap: [AppComponent],

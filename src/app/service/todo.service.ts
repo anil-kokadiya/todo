@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import {
@@ -12,6 +12,8 @@ import { Todo } from '../components/todo';
   providedIn: 'root',
 })
 export class TodoService {
+  // @Output() todoEmmiter: EventEmitter<any> = new EventEmitter();
+
   private toDoUrl = 'http://localhost:8000/api/todo';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -35,6 +37,12 @@ export class TodoService {
   addTodoEntry(toDoEntery: Todo): Observable<Todo> {
     return this.httpClient
       .post<Todo>(this.toDoUrl, toDoEntery, this.httpOptions)
+      .pipe(retry(3), catchError(this.httpErrorHandler));
+  }
+
+  updateTodoEntry(todo: Todo) {
+    return this.httpClient
+      .put<Todo>(this.toDoUrl + '/' + todo.TASK_ID, todo, this.httpOptions)
       .pipe(retry(3), catchError(this.httpErrorHandler));
   }
 
