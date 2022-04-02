@@ -27,6 +27,12 @@ export class TodoService {
       .pipe(retry(3), catchError(this.httpErrorHandler));
   }
 
+  getSingleTodo(id: number) {
+    return this.httpClient
+      .get(this.toDoUrl + '/' + id, this.httpOptions)
+      .pipe(retry(3), catchError(this.httpErrorHandler));
+  }
+
   deleteTodoEntry(id: number) {
     const url = `${this.toDoUrl}/${id}`;
     return this.httpClient
