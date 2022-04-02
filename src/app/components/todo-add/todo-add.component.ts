@@ -74,15 +74,15 @@ export class TodoAddComponent extends NgbDateParserFormatter implements OnInit {
     );
     console.log('ADD TODO : ', this.todo);
     this.todoViewEmitter.emit(this.todo);
-    this.clearTaskForm();
+    this.createTask();
   }
 
-  // createTask() {
-  //   this.todoService.addTodoEntry(this.todo).subscribe((data) => {
-  //     console.log('ADDED : ', data);
-  //     this.clearTaskForm();
-  //   });
-  // }
+  createTask() {
+    this.todoService.addTodoEntry(this.todo).subscribe((data) => {
+      console.log('ADDED : ', data);
+      this.clearTaskForm();
+    });
+  }
 
   clearTaskForm() {
     this.todo = {
