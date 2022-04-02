@@ -36,7 +36,7 @@ export class TodoUpdateComponent implements OnInit {
     this.todo.TASK_DUE = this.todoService.converDateObjectToString(
       this.todo.TASK_DUE,
       'DDMMYYYY',
-      '/'
+      '-'
     );
     this.todoService.updateTodoEntry(this.todo).subscribe((data) => {
       console.log('UPDATE SUCCESSFULLY', data);
