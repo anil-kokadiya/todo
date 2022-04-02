@@ -31,9 +31,7 @@ export class TodoAddComponent extends NgbDateParserFormatter implements OnInit {
     }
     return result;
   }
-  /**
-   * Function is used for the date format
-   */
+
   format(date: NgbDateStruct): string {
     let result: string = '';
     if (date) {
@@ -73,7 +71,7 @@ export class TodoAddComponent extends NgbDateParserFormatter implements OnInit {
       '/'
     );
     console.log('ADD TODO : ', this.todo);
-    this.todoViewEmitter.emit(this.todo);
+    this.todoService.todoEmmiter.emit(this.todo);
     this.createTask();
   }
 
@@ -92,6 +90,5 @@ export class TodoAddComponent extends NgbDateParserFormatter implements OnInit {
       TASK_STATUS: 'Pending',
     };
     this.isShowTaskForm = false;
-    window.location.reload();
   }
 }

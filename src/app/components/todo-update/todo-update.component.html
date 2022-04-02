@@ -56,11 +56,12 @@
           class="form-check-input"
           type="radio"
           name="taskStatus"
-          id="taskStatus"
-          value="todo.TASK_STATUS"
+          id="taskStatusPending"
+          value="Pending"
+          [(ngModel)]="todo.TASK_STATUS"
           [checked]="todoStatusPending"
         />
-        <label class="form-check-label" for="inlineRadio1">Pending</label>
+        <label class="form-check-label" for="taskStatusPending">Pending</label>
       </div>
       <div class="form-check form-check-inline">
         <input
@@ -68,11 +69,14 @@
           class="form-check-input"
           type="radio"
           name="taskStatus"
-          id="taskStatus"
-          value="todo.TASK_STATUS"
+          id="taskStatusCompleted"
+          value="Completed"
+          [(ngModel)]="todo.TASK_STATUS"
           [checked]="todoStatusCompleted"
         />
-        <label class="form-check-label" for="inlineRadio2">Completed</label>
+        <label class="form-check-label" for="taskStatusCompleted"
+          >Completed</label
+        >
       </div>
     </div>
     <div>

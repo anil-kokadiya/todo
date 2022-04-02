@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Todo } from '../todo';
 import { TodoService } from 'src/app/service/todo.service';
 import { Router } from '@angular/router';
@@ -8,13 +8,20 @@ import { Router } from '@angular/router';
   templateUrl: './todo-view.component.html',
   styleUrls: ['./todo-view.component.css'],
 })
-export class TodoViewComponent implements OnInit {
+export class TodoViewComponent implements OnInit, OnDestroy {
   todos: Todo[] = [];
   todo!: Todo;
   constructor(private todoService: TodoService, private router: Router) {}
 
   ngOnInit(): void {
     this.getTodoList();
+    this.todoService.todoEmmiter.subscribe(() => {
+      this.getTodoList();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.todoService.todoEmmiter.unsubscribe();
   }
 
   getTodoList(isTodoBlank: boolean = false) {
@@ -56,7 +63,11 @@ export class TodoViewComponent implements OnInit {
         this.todo = this.todos[i];
       }
     }
-    this.todo.TASK_STATUS = 'Completed';
+    if (this.todo.TASK_STATUS == 'Pending') {
+      this.todo.TASK_STATUS = 'Completed';
+    } else {
+      this.todo.TASK_STATUS = 'Pending';
+    }
     console.log('DATA TO BE UPDATE:', this.todo);
     this.todoService.updateTodoEntry(this.todo).subscribe((data) => {
       console.log('UPDATE SUCCESSFULLY', data);

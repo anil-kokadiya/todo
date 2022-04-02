@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Todo } from '../todo';
 
 @Component({
   selector: 'app-todo',
@@ -11,9 +10,4 @@ export class TodoComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  passTodoEmit(todo: Todo) {
-    this.newTodo = todo;
-    console.log('EMITTED : ', this.newTodo);
-  }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import {
@@ -13,7 +13,7 @@ import * as moment from 'moment/moment';
   providedIn: 'root',
 })
 export class TodoService {
-  // @Output() todoEmmiter: EventEmitter<any> = new EventEmitter();
+  @Output() todoEmmiter: EventEmitter<any> = new EventEmitter();
 
   private toDoUrl = 'http://localhost:8000/api/todo';
   private httpOptions = {
