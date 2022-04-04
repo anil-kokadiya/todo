@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Todo } from '../todo';
 import { TodoService } from 'src/app/service/todo.service';
 import { Router } from '@angular/router';
