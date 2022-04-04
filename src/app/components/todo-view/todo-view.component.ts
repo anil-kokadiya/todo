@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './todo-view.component.html',
   styleUrls: ['./todo-view.component.css'],
 })
-export class TodoViewComponent implements OnInit, OnDestroy {
+export class TodoViewComponent implements OnInit {
   todos: Todo[] = [];
   todo!: Todo;
   constructor(private todoService: TodoService, private router: Router) {}
@@ -18,10 +18,6 @@ export class TodoViewComponent implements OnInit, OnDestroy {
     this.todoService.todoEmmiter.subscribe(() => {
       this.getTodoList();
     });
-  }
-
-  ngOnDestroy(): void {
-    this.todoService.todoEmmiter.unsubscribe();
   }
 
   getTodoList(isTodoBlank: boolean = false) {
